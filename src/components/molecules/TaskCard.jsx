@@ -1,15 +1,15 @@
-import { useState } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import { toast } from "react-toastify"
-import ApperIcon from "@/components/ApperIcon"
-import Button from "@/components/atoms/Button"
-import Badge from "@/components/atoms/Badge"
-import { cn } from "@/utils/cn"
-import { formatDueDate, getDueDateStatus } from "@/utils/dateUtils"
-import { getPriorityColor, getPriorityIcon, getPriorityLabel } from "@/utils/taskUtils"
-import TaskEditModal from "@/components/molecules/TaskEditModal"
+import React, { forwardRef, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { toast } from "react-toastify";
+import { formatDueDate, getDueDateStatus, isOverdue } from "@/utils/dateUtils";
+import { cn } from "@/utils/cn";
+import { getPriorityColor, getPriorityIcon, getPriorityLabel } from "@/utils/taskUtils";
+import ApperIcon from "@/components/ApperIcon";
+import TaskEditModal from "@/components/molecules/TaskEditModal";
+import Badge from "@/components/atoms/Badge";
+import Button from "@/components/atoms/Button";
 
-const TaskCard = ({ 
+const TaskCard = forwardRef(({ 
   task, 
   onToggleComplete, 
   onDelete, 
@@ -17,7 +17,7 @@ const TaskCard = ({
   category,
   isDragging = false,
   dragHandleProps = {}
-}) => {
+}, ref) => {
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false)
   const [showEditModal, setShowEditModal] = useState(false)
   const [isCompleting, setIsCompleting] = useState(false)
@@ -55,7 +55,8 @@ const TaskCard = ({
   
   return (
     <>
-      <motion.div
+<motion.div
+        ref={ref}
         layout
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -226,7 +227,9 @@ const TaskCard = ({
         />
       )}
     </>
-  )
-}
+)
+})
+
+TaskCard.displayName = "TaskCard"
 
 export default TaskCard
