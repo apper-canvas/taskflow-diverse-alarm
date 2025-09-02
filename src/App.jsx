@@ -9,7 +9,7 @@ import Callback from "@/components/pages/Callback";
 import ErrorPage from "@/components/pages/ErrorPage";
 import ResetPassword from "@/components/pages/ResetPassword";
 import PromptPassword from "@/components/pages/PromptPassword";
-import App from "@/index.css";
+import "@/index.css";
 import Layout from "@/components/organisms/Layout";
 import SearchResults from "@/components/pages/SearchResults";
 import CompletedTasks from "@/components/pages/CompletedTasks";
