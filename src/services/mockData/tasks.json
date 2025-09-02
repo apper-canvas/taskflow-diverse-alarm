@@ -107,7 +107,7 @@
     "completedAt": null,
     "order": 9
   },
-  {
+{
     "Id": 10,
     "title": "Organize home office",
     "description": "Declutter desk, organize cables, clean workspace",
@@ -118,5 +118,65 @@
     "createdAt": "2024-01-14T09:30:00Z",
     "completedAt": null,
     "order": 10
+  },
+  {
+    "Id": 11,
+    "title": "Conduct team retrospective",
+    "description": "Review sprint performance and gather team feedback",
+    "categoryId": 1,
+    "priority": "medium",
+    "dueDate": "2024-01-19",
+    "completed": false,
+    "createdAt": "2024-01-15T11:00:00Z",
+    "completedAt": null,
+    "order": 11
+  },
+  {
+    "Id": 12,
+    "title": "Book annual health checkup",
+    "description": "Schedule comprehensive health screening",
+    "categoryId": 5,
+    "priority": "medium",
+    "dueDate": "2024-01-25",
+    "completed": false,
+    "createdAt": "2024-01-15T14:20:00Z",
+    "completedAt": null,
+    "order": 12
+  },
+  {
+    "Id": 13,
+    "title": "Review investment portfolio",
+    "description": "Analyze stock performance and rebalance portfolio",
+    "categoryId": 6,
+    "priority": "high",
+    "dueDate": "2024-01-22",
+    "completed": false,
+    "createdAt": "2024-01-15T16:45:00Z",
+    "completedAt": null,
+    "order": 13
+  },
+  {
+    "Id": 14,
+    "title": "Complete Python certification",
+    "description": "Finish final modules and take certification exam",
+    "categoryId": 4,
+    "priority": "high",
+    "dueDate": "2024-01-30",
+    "completed": false,
+    "createdAt": "2024-01-16T08:15:00Z",
+    "completedAt": null,
+    "order": 14
+  },
+  {
+    "Id": 15,
+    "title": "Plan family vacation",
+    "description": "Research destinations, book flights and accommodation",
+    "categoryId": 3,
+    "priority": "medium",
+    "dueDate": "2024-02-05",
+    "completed": false,
+    "createdAt": "2024-01-16T13:30:00Z",
+    "completedAt": null,
+    "order": 15
   }
 ]

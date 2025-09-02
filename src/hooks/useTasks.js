@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import * as taskService from "@/services/api/taskService"
+import { toast } from "react-toastify"
 
 export const useTasks = () => {
   const [tasks, setTasks] = useState([])
@@ -31,7 +32,7 @@ export const useTasks = () => {
   
   const updateTask = async (taskId, updates) => {
     try {
-      // Handle toggle completion
+// Handle toggle completion
       if (typeof updates === "boolean") {
         const task = tasks.find(t => t.Id === taskId)
         if (task) {
@@ -41,10 +42,15 @@ export const useTasks = () => {
             completedAt: updates ? new Date().toISOString() : null
           })
           setTasks(prev => prev.map(t => t.Id === taskId ? updatedTask : t))
+          if (updates) {
+            toast.success("Task completed! 🎉")
+          } else {
+            toast.success("Task restored!")
+          }
         }
       } else {
         const updatedTask = await taskService.updateTask(taskId, updates)
-        setTasks(prev => prev.map(t => t.Id === taskId ? updatedTask : t))
+setTasks(prev => prev.map(t => t.Id === taskId ? updatedTask : t))
       }
     } catch (err) {
       throw new Error("Failed to update task")
@@ -53,7 +59,7 @@ export const useTasks = () => {
   
   const deleteTask = async (taskId) => {
     try {
-      await taskService.deleteTask(taskId)
+await taskService.deleteTask(taskId)
       setTasks(prev => prev.filter(t => t.Id !== taskId))
     } catch (err) {
       throw new Error("Failed to delete task")

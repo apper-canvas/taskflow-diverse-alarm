@@ -6,12 +6,17 @@ import SearchBar from "@/components/molecules/SearchBar"
 import CategorySidebar from "@/components/molecules/CategorySidebar"
 import { useCategories } from "@/hooks/useCategories"
 import { useTasks } from "@/hooks/useTasks"
+import { useContext } from 'react'
+import { useSelector } from 'react-redux'
+import { AuthContext } from '../../App'
 import { cn } from "@/utils/cn"
 
 const Layout = ({ children }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const { categories } = useCategories()
+const { categories } = useCategories()
   const { tasks } = useTasks()
+  const { logout } = useContext(AuthContext)
+  const { user } = useSelector((state) => state.user)
   
   // Calculate task counts
   const taskCounts = categories.reduce((acc, category) => {
@@ -23,7 +28,6 @@ const Layout = ({ children }) => {
   
   const totalTasks = tasks.length
   const completedTasks = tasks.filter(task => task.completed).length
-  
   // Close mobile menu when route changes
   useEffect(() => {
     setMobileMenuOpen(false)
@@ -33,12 +37,43 @@ const Layout = ({ children }) => {
     <div className="h-screen flex overflow-hidden bg-white">
       {/* Desktop Sidebar */}
       <div className="hidden lg:flex lg:flex-shrink-0">
-        <CategorySidebar 
+<CategorySidebar 
           categories={categories}
           taskCounts={taskCounts}
           totalTasks={totalTasks}
           completedTasks={completedTasks}
         />
+        
+        {/* User Profile & Logout */}
+        <div className="border-t border-surface-200 pt-4 mt-4">
+          <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center space-x-3">
+              <div className="w-8 h-8 bg-gradient-to-r from-primary-500 to-primary-600 rounded-full flex items-center justify-center">
+                <span className="text-white text-sm font-semibold">
+                  {user?.firstName?.charAt(0) || 'U'}
+                </span>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-sm font-medium text-surface-900">
+                  {user?.firstName || 'User'}
+                </span>
+                <span className="text-xs text-surface-500">
+                  {user?.emailAddress || 'user@example.com'}
+                </span>
+              </div>
+            </div>
+          </div>
+          
+          <Button
+            variant="outline"
+            size="sm"
+            icon="LogOut"
+            onClick={logout}
+            className="w-full"
+          >
+            Logout
+          </Button>
+        </div>
       </div>
       
       {/* Mobile Sidebar Overlay */}
@@ -62,12 +97,43 @@ const Layout = ({ children }) => {
               transition={{ type: "tween", duration: 0.3 }}
               className="lg:hidden fixed inset-y-0 left-0 z-50 w-64"
             >
-              <CategorySidebar 
+<CategorySidebar 
                 categories={categories}
                 taskCounts={taskCounts}
                 totalTasks={totalTasks}
                 completedTasks={completedTasks}
               />
+              
+              {/* Mobile User Profile & Logout */}
+              <div className="border-t border-surface-200 pt-4 mt-4">
+                <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-8 h-8 bg-gradient-to-r from-primary-500 to-primary-600 rounded-full flex items-center justify-center">
+                      <span className="text-white text-sm font-semibold">
+                        {user?.firstName?.charAt(0) || 'U'}
+                      </span>
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="text-sm font-medium text-surface-900">
+                        {user?.firstName || 'User'}
+                      </span>
+                      <span className="text-xs text-surface-500">
+                        {user?.emailAddress || 'user@example.com'}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                
+                <Button
+                  variant="outline"
+                  size="sm"
+                  icon="LogOut"
+                  onClick={logout}
+                  className="w-full"
+                >
+                  Logout
+                </Button>
+              </div>
             </motion.div>
           </>
         )}

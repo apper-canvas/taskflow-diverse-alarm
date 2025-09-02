@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import * as categoryService from "@/services/api/categoryService"
+import { toast } from "react-toastify"
 
 export const useCategories = () => {
   const [categories, setCategories] = useState([])
